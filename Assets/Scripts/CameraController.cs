@@ -6,11 +6,11 @@ using System.Linq;
 public class CameraController : MonoBehaviour {
 
     private List<GameObject> players;
-    private Camera camera;
+    private Camera cameraMain;
 
     void Start()
     {
-        camera = GetComponent<Camera>();
+        cameraMain = GetComponent<Camera>();
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
         transform.position = new Vector3(AveragePlayersPostionX(), transform.position.y, transform.position.z);
         CalculateOrthographicSize();
@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour {
 
     private void CalculateOrthographicSize()
     {
-        camera.orthographicSize = ((players.Max(p => p.transform.transform.position.x) + 1) - (players.Min(p => p.transform.transform.position.x) - 1)) / camera.aspect / 2f;
-        if (camera.orthographicSize < 3) camera.orthographicSize = 3;
+        cameraMain.orthographicSize = ((players.Max(p => p.transform.transform.position.x) + 1) - (players.Min(p => p.transform.transform.position.x) - 1)) / cameraMain.aspect / 2f;
+        if (cameraMain.orthographicSize < 3) cameraMain.orthographicSize = 3;
     }
 }
